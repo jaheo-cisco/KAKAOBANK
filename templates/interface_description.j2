@@ -1,0 +1,8 @@
+Local,Remote,Interface
+{% for interface, details in lldp.structured.interfaces.items() %}
+{% for port_id, port_details in details.port_id.items() %}
+{% for neighbor, neighbor_details in port_details.neighbors.items() %}
+{{ interface }}, {{ neighbor }}, {{ port_id }}
+{% endfor %}
+{% endfor %}
+{% endfor %}
