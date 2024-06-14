@@ -16,70 +16,58 @@ import json
 from syslog import LOG_ERR, syslog
 from typing import Optional
 
-from cisco.vrf import *
-from cli import clid
+from cli import cli
 
-LOCAL_FILE = "/bootflash/py_route_monitor.json"
-VRF = "default"
+LOCAL_FILE ="bootflash:/running-config.txt"
 
 
-def get_run_config() -> dict:
+def get_run_config() -> str:
     """
-    Query route table
+
     """
     print("Querying running-config...")
-    running-config = json.loads(clid(f"show running-config"))
-    
+    running_config = cli("show running-config")
     print("Done. Collected running-config.")
-    return running-config
 
+    return running_config
 
-def write_route_file(routes: dict) -> None:
+def get_time() -> str:
     """
-    Write route list to file
+
     """
-    print(f"Storing current running-config in file: {LOCAL_FILE}")
+    current_time = cli("show clock").split()[0]
+    valid_time_string = current_time.replace(':', '_')
+    print("파일이 생성된 시간은 다음과 같습니다.")
+    print(valid_time_string)
+    print("현재 시간을 장비에서 추출 완료하였습니다.")
+
+    return valid_time_string
+
+def write_file(running_config: str, valid_time_string: str) -> None:
+    """
+    Write running-config to file
+    """
+    LOCAL_FILE = f"/bootflash/running-config_{valid_time_string}.txt"
+    print(f"다음 파일에 Running-config를 저장합니다.: {LOCAL_FILE}")
+    
     with open(LOCAL_FILE, "w") as file:
-        file.write(json.dumps(routes))
-    print("Done. running-config file saved.")
-
-
-
-#def send_syslog(diff: dict) -> None:
-#    """
-#    Send alert on any changed routes
-#    """
-#    print("Sending syslog messages to notify route changes...")
-#    for route in diff["removed"]:
-#        prefix = list(route.keys())[0]
-#        syslog(
-#            LOG_ERR,
-#            f"ROUTE REMOVED - PREFIX: {prefix}, NEXT HOP: {route[prefix]['nexthop']}, PROTOCOL: {route[prefix]['proto']}",
-#        )
-#    for route in diff["added"]:
-#        prefix = list(route.keys())[0]
-#        syslog(
-#            LOG_ERR,
-#            f"ROUTE ADDED - PREFIX: {prefix}, NEXT HOP: {route[prefix]['nexthop']}, PROTOCOL: {route[prefix]['proto']}",
-#        )
-#    print("Done. Syslog messages sent.")
-
+        file.write(running_config)
+    print("완료되었습니다. Running-config가 저장되었습니다.")
+    print("파일의 이름은 다음과 같습니다.")
+    print(LOCAL_FILE)
 
 def run():
-    print("Route monitor script started")
-    # Query current routing table
+    print("Running-config 저장 파이썬 스크립트를 시작합니다.")
+
     current_running_config = get_run_config()
-    # Open last file & compare diffs
-    #previous_prefixes = read_route_file()
-    #if previous_prefixes:
-        # Compare diff
-    #    diff = compare_routes(previous_prefixes, current_prefixes)
-        # Send syslog on any changes
-        #send_syslog(diff)
-    # Write new routes file
-    write_route_file(current_running_config)
-    print("Running-config save finished")
+    valid_time_string = get_time()
+
+    write_file(current_running_config,valid_time_string)
+    print("스크립트를 종료합니다.")
 
 
 if __name__ == "__main__":
     run()
+
+
+    
