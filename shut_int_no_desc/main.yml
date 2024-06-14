@@ -1,0 +1,17 @@
+---
+- name: Shutdown interfaces without description
+  hosts: nxos
+  gather_facts: no
+
+  tasks:
+    - name: Gather interfaces facts
+      cisco.nxos.nxos_facts:
+        gather_subset: interfaces
+
+    - name: Shutdown interfaces without description
+      cisco.nxos.nxos_interfaces:
+        config:
+          - name: "{{ item.key }}"
+            enabled: false
+      when: item.value.description is not defined or item.value.description == ''
+      loop: "{{ ansible_net_interfaces | dict2items }}"
