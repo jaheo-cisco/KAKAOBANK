@@ -7,7 +7,7 @@ such as
 - Create multiple set of VRFs
 - Create different set of networks per VRF
 - Attach those networks to physical interface
-- Create VPC and ttach those vpc interface to networks
+- Create VPC and attach those vpc interface to networks
 - Create regular l2 and l3 port-channel and attach those port-channels to networks
 - Detach physical interface from networks
 - Detach VPC from networks

@@ -1,0 +1,1 @@
+https://172.28.81.26/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/top-down/fabrics/ROGERS-DC-1/vrfs
