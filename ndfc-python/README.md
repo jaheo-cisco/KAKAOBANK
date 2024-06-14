@@ -1,6 +1,15 @@
+
+
+
 NDFC rest api based python scripts are created mainly for NDFC based POC setup.
 These scripts will be helpful to create bulk set of VRFs, Networks, VPC, Port channels and
 attaching the physical interface or port channels to the respective networks.
+
+<img width="1380" alt="스크린샷 2024-06-14 오후 8 05 51" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/ed0e3e80-c61c-4ec7-b4fd-70397021c66f">
+
+<img width="1376" alt="스크린샷 2024-06-14 오후 8 05 29" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/2b511c2f-a8ae-47e6-a1f7-1893f8e8ec76">
+
+
 
 This help file help you to navigate how to use the script file and how to create basic config per Fabric
 such as
