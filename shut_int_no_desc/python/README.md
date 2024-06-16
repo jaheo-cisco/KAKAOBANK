@@ -1,2 +1,3 @@
 <img width="567" alt="스크린샷 2024-06-17 오전 12 53 16" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/e5f77d78-04d4-494f-a182-e169cd1a2955">
-![Uploading 스크린샷 2024-06-17 오전 12.54.34.png…]()
+
+<img width="470" alt="스크린샷 2024-06-17 오전 12 54 59" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/38bf350a-eb69-43e0-9cad-3c96e33bcf16">
