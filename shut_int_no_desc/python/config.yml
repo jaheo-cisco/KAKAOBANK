@@ -1,0 +1,15 @@
+---
+
+inventory:
+       plugin: SimpleInventory
+       options:
+            host_file: "hosts.yml"
+            #group_file: "groups.yml"
+            #defaults_file: "inventory/defaults.yaml"
+
+runner:
+       plugin: threaded
+       options:
+            num_workers: 5
+
+
