@@ -9,8 +9,7 @@ attaching the physical interface or port channels to the respective networks.
 
 <img width="1376" alt="스크린샷 2024-06-14 오후 8 05 29" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/2b511c2f-a8ae-47e6-a1f7-1893f8e8ec76">
 
-![image](https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/641fa46b-e7a0-4b9a-8aff-5a91ea862193)
-
+<img width="565" alt="스크린샷 2024-06-26 오후 5 18 26" src="https://github.com/jaheo-cisco/KAKAOBANK/assets/172005971/3a8b7ac8-5959-4510-8762-740b0c8d11f3">
 
 This help file help you to navigate how to use the script file and how to create basic config per Fabric
 such as
