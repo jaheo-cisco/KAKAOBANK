@@ -5,17 +5,16 @@
   roles:
     - ansible-pyats
   tasks:
-   # - name: Device information (기기명, 버전명, 모델명, OS 출력) # 작업의 이름을 정의합니다.
-   #   pyats_parse_command: # 아래의 코드는 주석 처리되어 있습니다. 이 코드는 각 인터페이스의 mode를 출력합니다.
-   #     command: show version # 실행할 명령을 정의합니다.
-   #   register: version # 명령의 결과를 'version' 변수에 저장합니다.
-
-   # - debug: # debug 모듈을 사용하여 디버깅 메시지를 출력합니다.
-   #     msg: # 출력할 메시지(호스트 정보, 장비 버전, 모델명, OS)를 정의합니다.
-   #       - "Hostname: {{ version.structured.platform.hardware.device_name }}"
-   #       - "Version: {{ version.structured.platform.software.system_version }}"
-   #       - "Model: {{ version.structured.platform.hardware.model }}"
-   #       - "OS: {{ version.structured.platform.os }}"
+    - name: Device information (기기명, 버전명, 모델명, OS 출력) # 작업의 이름을 정의합니다.
+      pyats_parse_command: # 아래의 코드는 주석 처리되어 있습니다. 이 코드는 각 인터페이스의 mode를 출력합니다.
+        command: show version # 실행할 명령을 정의합니다.
+      register: version # 명령의 결과를 'version' 변수에 저장합니다.
+    - debug: # debug 모듈을 사용하여 디버깅 메시지를 출력합니다.
+        msg: # 출력할 메시지(호스트 정보, 장비 버전, 모델명, OS)를 정의합니다.
+          - "Hostname: {{ version.structured.platform.hardware.device_name }}"
+          - "Version: {{ version.structured.platform.software.system_version }}"
+          - "Model: {{ version.structured.platform.hardware.model }}"
+          - "OS: {{ version.structured.platform.os }}"
 
 
     - name: lldp Status Check
@@ -49,14 +48,16 @@
       register: result_before
 
     - name: Update switch descriptions
-      nxos_interface:
-        name: "{{ item.key }}"
-        description: "## LLDP: {{ item.value.Remote }}'s {{ item.value.Interface }}  ##"
+      cisco.nxos.nxos_interfaces:
+        config:
+          - name: "{{ item.key }}"
+            description: "## LLDP: {{ item.value.Remote }}'s {{ item.value.Interface }}  ##"
+            enabled: true
       loop: "{{ csv_data.dict | dict2items }}"
       when: item.key != 'Local'
 
     - name: collect config (after)
-      nxos_command:
+      cisco.nxos.nxos_command:
         commands:
           - show int description
       register: result_after
@@ -64,4 +65,3 @@
     - name: The difference between current running-config and previous one
       debug:
         msg: "{{ result_before.stdout[0] | genie_config_diff(result_after.stdout[0], mode='add') }}"
-
