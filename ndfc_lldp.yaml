@@ -51,7 +51,7 @@
       cisco.nxos.nxos_interfaces:
         config:
           - name: "{{ item.key }}"
-            description: "## LLDP: {{ item.value.Remote }}'s {{ item.value.Interface }}  ##"
+            description: "#LLDP:{{ item.value.Remote }}'s {{ item.value.Interface }}#"
             enabled: true
       loop: "{{ csv_data.dict | dict2items }}"
       when: item.key != 'Local'
