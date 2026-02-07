@@ -65,10 +65,8 @@ e"],
             prefix_list.append(
                 {
                     prefixes["ipprefix"]: {
-                        "nexthop": prefixes["TABLE_path"]["ROW_path"]["ipnexthop
-"],
-                        "proto": prefixes["TABLE_path"]["ROW_path"]["clientname"
-],
+                        "nexthop": prefixes["TABLE_path"]["ROW_path"]["ipnexthop"],
+                        "proto": prefixes["TABLE_path"]["ROW_path"]["clientname"],
                     }
                 }
             )
