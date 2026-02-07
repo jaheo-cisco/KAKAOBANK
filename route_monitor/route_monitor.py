@@ -42,10 +42,8 @@ def get_routes() -> dict:
                 prefix_list.append(
                     {
                         route: {
-                            "nexthop": prefix["TABLE_path"]["ROW_path"]["ipnexth
-op"],
-                            "proto": prefix["TABLE_path"]["ROW_path"]["clientnam
-e"],
+                            "nexthop": prefix["TABLE_path"]["ROW_path"]["ipnexthop"],
+                            "proto": prefix["TABLE_path"]["ROW_path"]["clientname"],
                         }
                     }
                 )
